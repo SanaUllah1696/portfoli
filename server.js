@@ -3,8 +3,9 @@ const bodyparser=require("body-parser");
 
 const app = express();
 
-app.use(express.json());
-app.use(express.urlencoded());
+
+
+const urlencoder=app.use(express.urlencoded({extended:true}));
 
 app.use(express.static('public'))
 
@@ -13,9 +14,14 @@ app.get("/",function(req,res){
 
 });
 
-app.post("/",function(req,res){
-    const data=req.body;
-const v = confirm(data);
+app.post("/", function(req,res){
+    var data=req.body;
+    data=JSON.stringify(data)
+    console.log(data);
+
+    res.send("Thank you! <br> <br> <br>"+data);
+    
+          
 }
 );
 
